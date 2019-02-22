@@ -23,10 +23,13 @@ func main() {
 
 	var cInt = 19
 	fmt.Printf("cInt Type is %T \n",cInt)
-	//aInt = "dddd"
+	//aInt = "string"
 
 	dInt := 40  //自动推导类型
 	fmt.Printf("dInt Type is %T value is %d \n",dInt,dInt)
+
+	eString := "add"
+	fmt.Printf("dInt Type is %T value is %s \n",eString,eString)
 }
 
 
