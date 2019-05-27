@@ -19,5 +19,6 @@ func main() {
 
 	elem = 2
 	fmt.Println("Add a key-element pair to a nil map...")
-	m["two"] = elem // 这里会引发panic。
+	m["two"] = elem // 这里会引发panic。//当我们试图在一个值为nil的字典中添加键 - 元素对的时候，Go 语言的运行时系统就会立即抛出一个 panic
+
 }
