@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 func main() {
+	/*一个通道相当于一个先进先出（FIFO）的队列*/
 	ch1 := make(chan int, 3)
 	ch1 <- 2
 	ch1 <- 1
