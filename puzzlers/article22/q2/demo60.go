@@ -51,7 +51,7 @@ func count(c *counter) {
 		}()
 		for j := 1; j <= 20; j++ {
 			time.Sleep(time.Millisecond * 200)
-			log.Printf("The number in counter: %d [%d-%d]",
+			log.Printf("----The number in counter: %d [%d-%d]",
 				c.number(), 1, j)
 		}
 	}()
@@ -61,7 +61,7 @@ func count(c *counter) {
 		}()
 		for k := 1; k <= 20; k++ {
 			time.Sleep(time.Millisecond * 300)
-			log.Printf("The number in counter: %d [%d-%d]",
+			log.Printf("****The number in counter: %d [%d-%d]",
 				c.number(), 2, k)
 		}
 	}()
