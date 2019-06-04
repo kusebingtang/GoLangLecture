@@ -80,9 +80,9 @@ func forAndCAS2() {
 			newNum := currNum + 2
 			time.Sleep(time.Millisecond * 200)
 			if atomic.CompareAndSwapInt32(&num, currNum, newNum) {
-				fmt.Printf("The number: %d [%d-%d]\n", newNum, id, i)
+				fmt.Printf("---- The number: %d [%d-%d]\n", newNum, id, i)
 			} else {
-				fmt.Printf("The CAS operation failed. [%d-%d]\n", id, i)
+				fmt.Printf("---- The CAS operation failed. [%d-%d]\n", id, i)
 			}
 		}
 	}(1, max)
@@ -98,9 +98,9 @@ func forAndCAS2() {
 			newNum := currNum + 2
 			time.Sleep(time.Millisecond * 200)
 			if atomic.CompareAndSwapInt32(&num, currNum, newNum) {
-				fmt.Printf("The number: %d [%d-%d]\n", newNum, id, j)
+				fmt.Printf("**** The number: %d [%d-%d]\n", newNum, id, j)
 			} else {
-				fmt.Printf("The CAS operation failed. [%d-%d]\n", id, j)
+				fmt.Printf("**** The CAS operation failed. [%d-%d]\n", id, j)
 			}
 		}
 	}(2, max)
