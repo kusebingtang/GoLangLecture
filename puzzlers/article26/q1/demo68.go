@@ -13,7 +13,7 @@ func main() {
 
 func coordinateWithContext() {
 	total := 12
-	var num int32
+	var num int32 = 0
 	fmt.Printf("The number: %d [with context.Context]\n", num)
 	cxt, cancelFunc := context.WithCancel(context.Background())
 	for i := 1; i <= total; i++ {

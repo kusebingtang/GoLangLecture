@@ -14,7 +14,7 @@ func main() {
 func coordinateWithWaitGroup() {
 	total := 12
 	stride := 3
-	var num int32
+	var num int32 = 0
 	fmt.Printf("The number: %d [with sync.WaitGroup]\n", num)
 	var wg sync.WaitGroup
 	//fmt.Println("Start loop ...")
