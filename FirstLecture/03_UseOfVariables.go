@@ -1,6 +1,6 @@
 //go 变量的使用
 
-package main
+package FirstLecture
 
 import "fmt"
 

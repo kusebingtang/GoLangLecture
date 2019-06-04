@@ -1,4 +1,4 @@
-package main
+package FirstLecture
 
 import "fmt"
 

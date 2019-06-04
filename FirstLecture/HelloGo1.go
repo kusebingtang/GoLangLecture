@@ -4,7 +4,7 @@
 * 3）程序必须有一个main包（重要）
 */
 
-package main
+package FirstLecture
 
 import "fmt"
 
