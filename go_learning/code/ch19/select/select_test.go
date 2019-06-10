@@ -13,7 +13,6 @@ func service() string {
 
 func AsyncService() chan string {
 	retCh := make(chan string, 1)
-	//retCh := make(chan string, 1)
 	go func() {
 		ret := service()
 		fmt.Println("returned result.")
