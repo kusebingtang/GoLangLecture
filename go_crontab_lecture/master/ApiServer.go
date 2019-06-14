@@ -22,8 +22,6 @@ var (
 // POST job={"name": "job1", "command": "echo hello", "cronExpr": "* * * * *"}
 func handleJobSave(resp http.ResponseWriter, req *http.Request) {
 
-	fmt.Println("handleJobSave")
-
 	var (
 		err     error
 		postJob string
@@ -33,7 +31,6 @@ func handleJobSave(resp http.ResponseWriter, req *http.Request) {
 	)
 
 	if err = req.ParseForm(); err != nil {
-		fmt.Println(err)
 		goto ERR
 	}
 
@@ -61,6 +58,44 @@ ERR:
 	fmt.Println(err)
 }
 
+
+
+//删除任务接口
+//Post请求  /job/delete name=job1
+func handleJobDelete(resp http.ResponseWriter, req *http.Request) {
+
+	var(
+		err error
+		deleteJobName string
+		oldJob  *common.Job
+		bytes   []byte
+	)
+
+	fmt.Println("enter handleJobDelete")
+
+	if err = req.ParseForm(); err != nil {
+		goto ERR
+	}
+
+	deleteJobName = req.PostForm.Get("name")
+
+	if oldJob,err = G_jobMgr.DeleteJob(deleteJobName); err!=nil {
+		goto ERR
+	}
+
+	//正常应答
+	if bytes,err = common.BuildResponse(0,"success",oldJob);err == nil {
+		resp.Write(bytes)
+	}
+
+	return
+
+ERR:
+	if bytes,err = common.BuildResponse(-1,err.Error(),nil);err == nil {
+		resp.Write(bytes)
+	}
+}
+
 func InitApiServer() (err error) {
 	var (
 		mux        *http.ServeMux
@@ -70,6 +105,7 @@ func InitApiServer() (err error) {
 
 	mux = http.NewServeMux()
 	mux.HandleFunc("/job/save", handleJobSave)
+	mux.HandleFunc("/job/delete", handleJobDelete)
 
 	//启动TCP监听
 	if listener, err = net.Listen("tcp", ":"+strconv.Itoa(G_config.ApiPort)); err != nil {
