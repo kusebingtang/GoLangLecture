@@ -4,7 +4,8 @@ import (
 	"GoLecture/go_crontab_lecture/common"
 	"context"
 	"encoding/json"
-	"go.etcd.io/etcd/clientv3"
+	"github.com/coreos/etcd/clientv3"
+	"github.com/coreos/etcd/mvcc/mvccpb"
 	"time"
 )
 
@@ -110,3 +111,37 @@ func (jobMgr *JobMgr) DeleteJob(jobName string) (oldJob *common.Job, err error) 
 	}
 	return
 }
+
+
+
+func (jobMgr *JobMgr) ListWorkers() (jobList []*common.Job, err error) {
+
+	var (
+		dirKey string
+		getRes *clientv3.GetResponse
+		kvPair *mvccpb.KeyValue
+		jobObj *common.Job
+	)
+
+	dirKey = common.JOB_SAVE_DIR
+
+	if getRes,err = jobMgr.kv.Get(context.TODO(),dirKey,clientv3.WithPrefix());err !=nil {
+		return
+	}
+
+	jobList = make([]*common.Job, 0)
+
+	for _,kvPair = range  getRes.Kvs {
+		jobObj = &common.Job{}
+		if err = json.Unmarshal(kvPair.Value,jobObj); err != nil {
+			err = nil
+			continue
+		}
+
+		jobList = append(jobList,jobObj)
+	}
+	return
+}
+
+
+
