@@ -9,8 +9,26 @@ import (
 	"os"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 )
+
+
+
+type ImageContent struct {
+	Image string	`json:"image"`
+	Content string `json:"content"`
+}
+
+
+type ArticleDetail struct {
+	Title string	`json:"title"`
+	Sorting []string `json:"sorting"`
+	Articles []map[string]string `json:"articles"`
+	Images []map[string]ImageContent `json:"images"`
+
+
+}
 
 
 type Publisher struct {
@@ -81,6 +99,128 @@ func saveInfoLocalFile(index int,jsonString string)  {
 }
 
 
+func saveArticleDetailLocalFile(index int,jsonString string)  {
+
+	path :="/Users/zyh/GolandProjects/GoLangLecture/Advance/haodiaoyu/ArticleDetail/at_"+strconv.Itoa(index)+".json"
+
+	file,err := os.Create(path)
+	if err != nil {
+		return
+	}
+	defer  file.Close()
+	file.WriteString(jsonString)
+}
+
+
+
+
+func workItemBBS(url string,bbsID int,contextTitle string,pageChannel chan int ) {
+
+	println(url)
+
+	result,err := HttpGetDouPan(url)
+	if err != nil {
+		println("workItemBBS ==> Http Get Error!",err)
+		return
+	}
+
+	//fmt.Println("workItemBBS result=>", result)
+	articleDetail:= ArticleDetail{
+		Title:contextTitle,
+	}
+	var sorting []string
+	var articles []map[string]string
+	var imagesSlice []map[string]ImageContent
+
+
+	regexp0 := regexp.MustCompile(`<table cellspacing="0" cellpadding="0"><tr><td class="t_f" id="(.*?)<br />
+
+<ignore_js_op>`)
+	filterTitle :=  regexp0.FindAllStringSubmatch(result,1)
+	var artCount = 0
+	if len(filterTitle)==1 {
+		title := filterTitle[0][1]
+		titleSP :=strings.Split(title, ">")
+		//fmt.Println(titleSP[1])
+		map1 := make(map[string]string)
+		map1["art1"] = titleSP[1]
+		articles = append(articles, map1)
+		sorting = append(sorting,"art1")
+		artCount = 1
+	}else {
+		artCount = 0
+	}
+
+
+	regexp1 := regexp.MustCompile(`</ignore_js_op>
+<br />(?s:(.*?))<ignore_js_op>`)
+	filterName :=  regexp1.FindAllStringSubmatch(result,-1)
+	fmt.Println(len(filterName))
+
+	regexp2 := regexp.MustCompile(`<p style="font-size: 15px; text-align: center; color: #666;">(.*?)</p>`)
+	filterImageContent :=  regexp2.FindAllStringSubmatch(result,-1)
+
+	regexp3 := regexp.MustCompile(`<ignore_js_op>
+<img(?s:(.*?))<p style="font-size: 15px; text-align: center; color: #666;">`)
+	filterImages :=  regexp3.FindAllStringSubmatch(result,-1)
+	regexp4 := regexp.MustCompile(`" file="(.*?)" class="zoom"`)
+
+	length2:= len(filterImageContent)
+	length := len(filterName)
+	println(length2)
+
+	lens := length
+	if length>length2{
+		lens = length2
+	}
+	for i:=1;i<=lens ;i++ {
+		//fmt.Println("===========>  :",filterName[i-1][1])
+		articleStr := filterName[i-1][1]
+		articleStr = strings.Trim(articleStr,"\r\n")
+		articleStr = strings.Trim(articleStr,"<br />")
+		articleStr = strings.Replace(articleStr, "<br />", "", -1)
+		fmt.Println("===========>  :",articleStr)
+
+		var imageTag = "imageShow_"+strconv.Itoa(i)
+		sorting = append(sorting,imageTag)
+		if len(articleStr) == 0 {
+
+		} else {
+			artCount++
+			tag := "art"+strconv.Itoa(artCount)
+			sorting = append(sorting,tag)
+			map2 := make(map[string]string)
+			map2[tag] = articleStr
+			articles = append(articles, map2)
+		}
+
+		str := filterImages[i-1][0]
+		filterImageURL := regexp4.FindAllStringSubmatch(str,1)
+		fmt.Println(filterImageURL[0][1])
+
+		imageContent := filterImageContent[i-1][1]
+		ic :=ImageContent{
+			Image:filterImageURL[0][1],
+			Content:imageContent,
+		}
+		icMap := make(map[string]ImageContent)
+		imageShowTag := "imageShow_"+strconv.Itoa(i)
+		icMap[imageShowTag] = ic
+		imagesSlice = append(imagesSlice, icMap)
+	}
+
+	articleDetail.Articles = articles
+	articleDetail.Sorting = sorting
+	articleDetail.Images = imagesSlice
+	str, err := json.Marshal(articleDetail)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("map to json", string(str))
+	saveArticleDetailLocalFile(bbsID,string(str))
+	pageChannel <- bbsID
+}
+
 
 
 func workDouban(pageNumber int)  {
@@ -94,6 +234,7 @@ func workDouban(pageNumber int)  {
 
 	fmt.Printf("========第 %d 页 抓取成功，开始分析页面============\n",1)
 
+	pageChannel := make(chan  int)
 	articleList := make([]Article,0)
 
 	regexp1 := regexp.MustCompile(`<div class="article">(?s:(.*?))</span></span>`)
@@ -133,9 +274,9 @@ func workDouban(pageNumber int)  {
 
 		regexp8 := regexp.MustCompile(`<img src="(.*?)" alt="" />`)
 		filterImagesURL:=  regexp8.FindAllStringSubmatch(imagesString,3)
-		fmt.Println(filterImagesURL[0][1])
-		fmt.Println(filterImagesURL[1][1])
-		fmt.Println(filterImagesURL[2][1])
+		//fmt.Println(filterImagesURL[0][1])
+		//fmt.Println(filterImagesURL[1][1])
+		//fmt.Println(filterImagesURL[2][1])
 
 		randNumber := rand.Intn(100000)+10000
 		now := time.Now().Unix()-int64(randNumber)
@@ -161,14 +302,9 @@ func workDouban(pageNumber int)  {
 		articleObj.Url = filterURL[0][1]
 		articleObj.PublisherUser = &publisheruser
 		articleList = append(articleList,articleObj)
-		////Marshal失败时err!=nil
-		//jsonStu, err := json.Marshal(articleObj)
-		//if err != nil {
-		//	fmt.Println("生成json字符串错误")
-		//}
-		//
-		////jsonStu是[]byte类型，转化成string类型便于查看
-		//fmt.Println(string(jsonStu))
+
+		go workItemBBS(filterURL[0][1],filterIDValue,filterTitle[0][1],pageChannel)
+
 		fmt.Println("-----------------------#######--------------------------------------")
 	}
 
@@ -188,6 +324,13 @@ func workDouban(pageNumber int)  {
 
 	saveInfoLocalFile(pageNumber,string(jsonCommutity))
 
+	//workItemBBS("https://bbs.haodiaoyu.com/thread-264798-1-1.html",264798,"昨日再觅新钓点，今日平台装备上阵")
+
+	n := len(filterName)
+	for i:=0;i<n ;i++  {
+		bbsID := <-pageChannel
+		fmt.Printf("workItemBBS %d Finish \n",bbsID)
+	}
 }
 
 func main()  {

@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	github.com/coreos/etcd v3.3.13+incompatible
+	github.com/djimenez/iconv-go v0.0.0-20160305225143-8960e66bd3da // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/gogo/protobuf v1.2.1 // indirect
 	github.com/golang/snappy v0.0.1 // indirect

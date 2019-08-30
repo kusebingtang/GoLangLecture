@@ -1,0 +1,47 @@
+07-10 13:42:27.019: I/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:27.019: E/Unity(7894): list    21
+07-10 13:42:27.019: E/Unity(7894):  
+07-10 13:42:27.019: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:27.058: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/LKPY_Hall_ShenMiShangRen_Panel.assetbundle?time=1562766147058.6
+07-10 13:42:27.058: E/Unity(7894):  
+07-10 13:42:27.058: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:27.149: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/pagestack/config/HallPageConfig.lua?time=1562766147149
+07-10 13:42:27.149: E/Unity(7894):  
+07-10 13:42:27.149: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:27.379: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/UIPanelController/Hall_DailyCoins_New_panel.lua?time=1562766147379.18
+07-10 13:42:27.379: E/Unity(7894):  
+07-10 13:42:27.379: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:27.507: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/UIPanelController/LoginPage/Game_Login_Banhao_Info_Panel.lua?time=1562766147506.8
+07-10 13:42:27.507: E/Unity(7894):  
+07-10 13:42:27.507: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:27.616: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/UIPanelController/HallPage/Game_LKPY_Hall_NewUI_Panel.lua?time=1562766147615.84
+07-10 13:42:27.616: E/Unity(7894):  
+07-10 13:42:27.616: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:27.747: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/UIPanelController/Surface_LKPY_UserCenter_Panel.lua?time=1562766147747.06
+07-10 13:42:27.747: E/Unity(7894):  
+07-10 13:42:27.747: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:27.876: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/UIPanelController/Game_Login_Panel.lua?time=1562766147875.71
+07-10 13:42:27.876: E/Unity(7894):  
+07-10 13:42:27.876: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:28.038: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/UIPanelController/Hall_PresentToScore_Panel.lua?time=1562766148038.47
+07-10 13:42:28.038: E/Unity(7894):  
+07-10 13:42:28.038: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:28.204: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/UIPanelController/Hall_Activity_Panel.lua?time=1562766148203.88
+07-10 13:42:28.204: E/Unity(7894):  
+07-10 13:42:28.204: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:28.375: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/UIPanelController/CommonPage/GameCommon_ChoosePorps_Panel.lua?time=1562766148374.6
+07-10 13:42:28.375: E/Unity(7894):  
+07-10 13:42:28.375: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:28.468: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/gameservices/ChannelPercentReduceConfig.lua?time=1562766148467.76
+07-10 13:42:28.468: E/Unity(7894):  
+07-10 13:42:28.468: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:28.670: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/gameprotocol/LuaHallProtocol.lua?time=1562766148669.85
+07-10 13:42:28.670: E/Unity(7894):  
+07-10 13:42:28.670: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:28.735: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/gameprotocol/GameUserPlayerManager.lua?time=1562766148735.16
+07-10 13:42:28.735: E/Unity(7894):  
+07-10 13:42:28.735: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:28.902: E/Unity(7894): http://cdn.game100.cn/unity_games/release/98BY/res_android/lua/gameprotocol/GameSetting.lua?time=1562766148902.1
+07-10 13:42:28.902: E/Unity(7894):  
+07-10 13:42:28.902: E/Unity(7894): (Filename: ./artifacts/AndroidManagedGenerated/UnityEngineDebug.cpp Line: 56)
+07-10 13:42:28.999: I/Unity(7894): downloadsuccess:   21
