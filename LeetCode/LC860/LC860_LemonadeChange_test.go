@@ -46,9 +46,11 @@ func lemonadeChange(bills []int) bool {
 
 //[5,5,5,10,20]
 func TestLemonadeChangeElement(t *testing.T) {
-	bills:=  []int{5,5,5,10,20}
+	bills:=  []int{1,1,1,1,2,2,2,3,3,4,5}
 
 	result := lemonadeChange(bills)
 
 	t.Log(result)
+
+	t.Log(bills)
 }
